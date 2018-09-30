@@ -24,3 +24,8 @@ services:
     image: infrastructureascode/hello-world
     ports:
       - "8000:8080"
+
+  downstreamhtml:
+    image: nginxdemos/hello
+    ports:
+      - "8001:80"

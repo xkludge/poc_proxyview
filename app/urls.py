@@ -30,6 +30,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path(r'accounts/', include('django.contrib.auth.urls')),
     url(r'^amidala/(?P<path>.*)$', login_required(ProxyView.as_view(upstream='http://downstream:8080/'))),
-    url(r'^sentinel/(?P<path>.*)$', login_required(ProxyView.as_view(upstream='http://downstream:8080/metrics'))),
+    url(r'^sentinel/(?P<path>.*)$', login_required(ProxyView.as_view(upstream='http://downstreamhtml:80/'))),
     url('^', include('django.contrib.auth.urls')),
 ]

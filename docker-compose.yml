@@ -1,0 +1,26 @@
+version: '2'
+services:
+  identity_db:
+    image: mariadb
+    environment:
+      MYSQL_USER: identity
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: identity
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  identity:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8080
+    volumes:
+      - .:/opt/identity
+    ports:
+      - "8080:8080"
+    depends_on:
+      - identity_db
+
+  downstream:
+    image: infrastructureascode/hello-world
+    ports:
+      - "8000:8080"
